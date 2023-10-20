@@ -285,7 +285,8 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 	}
 
 	envFunc := funcMap["env"].(func(string) string)
-	funcMap["env"] = func(value interface{}) (string, error) {
+
+	funcMap["env"] = func(value interface{}, args ...string) (string, error) {
 		envName := fmt.Sprint(value)
 		if err := giterminismManager.Inspector().InspectConfigGoTemplateRenderingEnv(context.Background(), envName); err != nil {
 			return "", err
@@ -293,6 +294,9 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 
 		if !giterminismManager.LooseGiterminism() {
 			if _, exist := os.LookupEnv(envName); !exist {
+				for _, arg := range args {
+					return arg, nil
+				}
 				return "", fmt.Errorf("the environment variable %q must be set", envName)
 			}
 		}
