@@ -214,7 +214,7 @@ The `env` function reads an environment variable. The environment variable must 
 __Syntax__:
 {% raw %}
 ```yaml
-{{ env "<ENV_NAME>" "value if ENV_NAME not exists" }}
+{{ env "<ENV_NAME>" "value if ENV_NAME missing" }}
 ```
 {% endraw %}
 
