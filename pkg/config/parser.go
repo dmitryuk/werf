@@ -292,6 +292,8 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 			return "", err
 		}
 
+		envValue, exist := os.LookupEnv(envName);
+
 		if !giterminismManager.LooseGiterminism() {
 			if _, exist := os.LookupEnv(envName); !exist {
 				if len(args) >= 1 {
@@ -306,7 +308,7 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 			}
 		}
 
-		return envFunc(envName), nil
+		return  envValue, nil
 	}
 
 	funcMap["required"] = func(msg string, val interface{}) (interface{}, error) {
