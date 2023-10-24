@@ -294,9 +294,14 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 
 		if !giterminismManager.LooseGiterminism() {
 			if _, exist := os.LookupEnv(envName); !exist {
-				for _, arg := range args {
-					return arg, nil
+				if len(args) >= 1 {
+					return "", fmt.Errorf("more than 1 optional argument prohibited")
 				}
+				
+				if val, defaultExists := args[0]; defaultExists {
+					return val, nil
+				}
+
 				return "", fmt.Errorf("the environment variable %q must be set", envName)
 			}
 		}
