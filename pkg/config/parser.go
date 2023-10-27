@@ -306,7 +306,7 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 			}
 		}
 
-		return  envValue, nil
+		return envValue, nil
 	}
 
 	funcMap["required"] = func(msg string, val interface{}) (interface{}, error) {
