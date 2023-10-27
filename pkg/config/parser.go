@@ -284,8 +284,6 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 		return executeTemplate(tmpl, templateName, data)
 	}
 
-	envFunc := funcMap["env"].(func(string) string)
-
 	funcMap["env"] = func(value interface{}, args ...string) (string, error) {
 		envName := fmt.Sprint(value)
 		if err := giterminismManager.Inspector().InspectConfigGoTemplateRenderingEnv(context.Background(), envName); err != nil {
