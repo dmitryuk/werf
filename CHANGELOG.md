@@ -1,5 +1,88 @@
 # Changelog
 
+### [1.2.277](https://www.github.com/werf/werf/compare/v1.2.276...v1.2.277) (2023-12-29)
+
+
+### Bug Fixes
+
+* add WERF_NELM var (same as WERF_EXPERIMENTAL_DEPLOY_ENGINE) ([455d293](https://www.github.com/werf/werf/commit/455d29377b47be07efb100ed3528ce9a1689e8d9))
+* Nelm moved to separate repo ([be662c3](https://www.github.com/werf/werf/commit/be662c3577318b3ee145eafa7161e276d6ff00f7))
+
+### [1.2.276](https://www.github.com/werf/werf/compare/v1.2.275...v1.2.276) (2023-12-29)
+
+
+### Bug Fixes
+
+* pre-collapsed gitlab section not usable ([#5897](https://www.github.com/werf/werf/issues/5897)) ([68040b1](https://www.github.com/werf/werf/commit/68040b17a35cd9888d07eabde414c050877715df))
+
+### [1.2.275](https://www.github.com/werf/werf/compare/v1.2.274...v1.2.275) (2023-12-22)
+
+
+### Bug Fixes
+
+* **build:** files from git with spaces in path not removed on install/beforeSetup/setup patch-stages ([6c052db](https://www.github.com/werf/werf/commit/6c052db1c250cfb5cf5e0259849e15856700034a))
+
+### [1.2.274](https://www.github.com/werf/werf/compare/v1.2.273...v1.2.274) (2023-12-21)
+
+
+### Bug Fixes
+
+* **buildah:** fix digest change on rebuild of install/beforeSetup/setup stage when using multiple git-mappings in the same image ([52db306](https://www.github.com/werf/werf/commit/52db30637f090b6a721a66d1bdab8c7c48ebe8ad))
+
+### [1.2.273](https://www.github.com/werf/werf/compare/v1.2.272...v1.2.273) (2023-12-21)
+
+
+### Bug Fixes
+
+* **exp-engine:** "no matches for kind" when deploying CR for CRD from crds/ ([5c68186](https://www.github.com/werf/werf/commit/5c68186be8b10cdc33e7fef045be10df9a57dce5))
+
+### [1.2.272](https://www.github.com/werf/werf/compare/v1.2.271...v1.2.272) (2023-12-19)
+
+
+### Features
+
+* improve generic resource tracking ([c366a72](https://www.github.com/werf/werf/commit/c366a722681fd7cf348ec58bb42384464e47592a))
+
+
+### Bug Fixes
+
+* **staged-dockerfile:** explanatory error message when building unsupported Dockerfile conf ([a884912](https://www.github.com/werf/werf/commit/a884912608bbc0b0f0521e31a61dc3bd2407e7d3))
+
+### [1.2.271](https://www.github.com/werf/werf/compare/v1.2.270...v1.2.271) (2023-12-14)
+
+
+### Bug Fixes
+
+* **secrets:** empty secrets values yaml file results in werf error ([7fe6b2b](https://www.github.com/werf/werf/commit/7fe6b2b77eb7702e2e764e7592d3fad5d4696daf))
+
+### [1.2.270](https://www.github.com/werf/werf/compare/v1.2.269...v1.2.270) (2023-12-04)
+
+
+### Features
+
+* **container:** implement generic Retry-After header handling ([#5867](https://www.github.com/werf/werf/issues/5867)) ([b2a6022](https://www.github.com/werf/werf/commit/b2a60225a4f8d06429eb57cc3fb8b3a34e2addd3))
+
+
+### Bug Fixes
+
+* **secrets:** fix double decryption error when decrypting a yaml with multiple references to the same anchor ([a7df8cc](https://www.github.com/werf/werf/commit/a7df8cc98eecb1732e540e07ae9ec28b617b6e1d))
+
+### [1.2.269](https://www.github.com/werf/werf/compare/v1.2.268...v1.2.269) (2023-11-10)
+
+
+### Bug Fixes
+
+* **werf-in-image:** unable to update tuf meta ([#5846](https://www.github.com/werf/werf/issues/5846)) ([fd41be1](https://www.github.com/werf/werf/commit/fd41be173d885ced78dedda7bebca6f32cc0bda5))
+
+### [1.2.268](https://www.github.com/werf/werf/compare/v1.2.267...v1.2.268) (2023-11-10)
+
+
+### Features
+
+* **logboek:** pre-collapse GitLab log section ([#5842](https://www.github.com/werf/werf/issues/5842)) ([2b68426](https://www.github.com/werf/werf/commit/2b68426a8f081c3e90eb39503a9dc25a2b96d899))
+* **logs:** add --log-time and --log-time-format options ([#5844](https://www.github.com/werf/werf/issues/5844)) ([d83bd20](https://www.github.com/werf/werf/commit/d83bd20bd132c4ba1caa4d833dbe003535f5bf49))
+
+
 ### [1.2.267](https://www.github.com/werf/werf/compare/v1.2.266...v1.2.267) (2023-10-19)
 
 

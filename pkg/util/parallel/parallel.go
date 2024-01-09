@@ -62,15 +62,20 @@ func DoTasks(ctx context.Context, numberOfTasks int, options DoTasksOptions, tas
 
 		ctxWithBackgroundTaskID := context.WithValue(ctx, constant.CtxBackgroundTaskIDKey, workerID)
 		workerContext = logboek.NewContext(ctxWithBackgroundTaskID, logboek.Context(ctx).NewSubLogger(workerBuf, workerBuf))
-		logboek.Context(workerContext).Streams().SetPrefixStyle(style.Highlight())
-
-		if options.InitDockerCLIForEachWorker {
-			workerContextWithDockerCli, err := docker.NewContext(workerContext)
-			if err != nil {
-				return err
+		{
+			logboek.Context(workerContext).Streams().SetPrefixStyle(style.Highlight())
+			if logboek.Context(workerContext).Streams().IsPrefixTimeEnabled() {
+				logboek.Context(workerContext).Streams().SetPrefixTimeFormat("15:04:05")
 			}
 
-			workerContext = workerContextWithDockerCli
+			if options.InitDockerCLIForEachWorker {
+				workerContextWithDockerCli, err := docker.NewContext(workerContext)
+				if err != nil {
+					return err
+				}
+
+				workerContext = workerContextWithDockerCli
+			}
 		}
 
 		go func() {
