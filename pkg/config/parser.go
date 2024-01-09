@@ -285,28 +285,37 @@ func funcMap(tmpl *template.Template, giterminismManager giterminism_manager.Int
 	}
 
 	funcMap["env"] = func(value interface{}, args ...string) (string, error) {
-		envName := fmt.Sprint(value)
-		if err := giterminismManager.Inspector().InspectConfigGoTemplateRenderingEnv(context.Background(), envName); err != nil {
+		if len(args) > 1 {
+			return "", fmt.Errorf("more than 1 optional argument prohibited")
+		}
+
+		envVarName := fmt.Sprint(value)
+		if err := giterminismManager.Inspector().InspectConfigGoTemplateRenderingEnv(context.Background(), envVarName); err != nil {
 			return "", err
 		}
 
-		envValue, exist := os.LookupEnv(envName);
+		var fallbackValue *string
+		if len(args) == 1 {
+			fallbackValue = &args[0]
+		}
 
-		if !giterminismManager.LooseGiterminism() {
-			if _, exist := os.LookupEnv(envName); !exist {
-				if len(args) >= 1 {
-					return "", fmt.Errorf("more than 1 optional argument prohibited")
-				}
-				
-				if val, defaultExists := args[0]; defaultExists {
-					return val, nil
-				}
-
-				return "", fmt.Errorf("the environment variable %q must be set", envName)
+		giterministic := !giterminismManager.LooseGiterminism()
+		envVarValue, envVarFound := os.LookupEnv(envVarName)
+		if !envVarFound {
+			if fallbackValue != nil {
+				return *fallbackValue, nil
+			} else if giterministic {
+				return "", fmt.Errorf("the environment variable %q must be set or default must be provided", envVarName)
+			} else {
+				return "", nil
 			}
 		}
 
-		return envValue, nil
+		if envVarValue == "" && fallbackValue != nil {
+			return *fallbackValue, nil
+		}
+
+		return envVarValue, nil
 	}
 
 	funcMap["required"] = func(msg string, val interface{}) (interface{}, error) {
